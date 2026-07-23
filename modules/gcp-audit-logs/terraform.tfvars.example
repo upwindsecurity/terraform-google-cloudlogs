@@ -1,0 +1,45 @@
+gcp_organization_id        = "<your GCP organization ID>"
+infrastructure_project_id  = "<your GCP project ID>"
+upwind_management_sa_email = "<provided by Upwind during onboarding>"
+
+# Integration scope — choose one
+# integration_type  = "ORGANIZATION"              # default — one org-level sink
+# integration_type  = "FOLDER"
+# folder_id         = "123456789012"               # required when integration_type = FOLDER
+# integration_type    = "PROJECT"
+# monitored_project_ids  = ["my-project-1"]           # required when integration_type = PROJECT
+
+# Project filtering (ORGANIZATION and FOLDER types)
+# included_project_ids = ["proj-a", "proj-b"]         # capture only these projects (mutually exclusive with excluded_project_ids)
+# excluded_project_ids = ["noisy-project"]            # capture all except these (mutually exclusive with included_project_ids)
+
+# Folder-level audit log sources (ORGANIZATION type only; requires included_project_ids to be set)
+# folder_log_sources = ["123456789012"]            # also capture folder-level audit logs (e.g. IAM changes on the folder itself)
+
+# Log sources
+# enable_admin_activity_logs  = true               # Admin Activity (default: true)
+# enable_data_access_logs     = false              # Data Access — charges apply; must also be enabled in GCP org Audit Logs settings
+# enable_system_event_logs    = false              # System Event
+# enable_policy_denied_logs   = false              # Policy Denied — charges apply
+# Note: SA impersonation (GenerateAccessToken) and GKE/k8s log exclusion are hardcoded and not configurable.
+
+# Additional log sink exclusions (merged with default GKE exclusion — do not reuse the reserved name: exclude-gke-k8s)
+# log_sink_exclusions = [
+#   {
+#     name   = "my-custom-exclusion"
+#     filter = "protoPayload.serviceName=\"storage.googleapis.com\""
+#   }
+# ]
+
+# Resource naming
+# upwind_wif_secret          = "upwind-audit-logs-wif-secret"
+# log_sink_name              = "upwind-gcp-audit-logs-sink"
+# log_sink_description       = "Upwind audit logs sink."
+# pubsub_topic_name          = "upwind-gcp-audit-logs-topic"
+# pubsub_subscription_name   = "upwind-gcp-audit-logs-subscription"
+# resource_suffix            = ""                 # required when running the module more than once in the same project
+
+# Advanced
+# upwind_trusted_account_id  = "340457201789"    # Upwind prod (default); use 437279811180 for Development
+# message_retention_duration = "21600s"           # 6h; GCP range: 600s–604800s
+# labels                     = {}                # additional labels — upwind-component=gcp-audit-logs is always applied
