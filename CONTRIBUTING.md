@@ -388,8 +388,8 @@ make test-all
 
 If you have questions or need help:
 
-- Check [existing issues](https://github.com/upwindsecurity/terraform-module/issues)
-- Start a [Discussion](https://github.com/upwindsecurity/terraform-module/discussions)
+- Check [existing issues](https://github.com/upwindsecurity/terraform-google-cloudlogs/issues)
+- Start a [Discussion](https://github.com/upwindsecurity/terraform-google-cloudlogs/discussions)
 - Review the [main README](README.md)
 
 ## Questions?
@@ -397,7 +397,7 @@ If you have questions or need help:
 If you have questions about contributing, please:
 
 1. Check this guide and the [README](README.md)
-2. Search [existing issues](https://github.com/upwindsecurity/terraform-module/issues)
+2. Search [existing issues](https://github.com/upwindsecurity/terraform-google-cloudlogs/issues)
 3. Create a new issue with the `question` label
 
 Thank you for contributing! 🎉
