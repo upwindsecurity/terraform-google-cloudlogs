@@ -23,7 +23,7 @@ upwind_management_sa_email = "<provided by Upwind during onboarding>"
 # enable_policy_denied_logs   = false              # Policy Denied — charges apply
 # Note: SA impersonation (GenerateAccessToken) and GKE/k8s log exclusion are hardcoded and not configurable.
 
-# Additional log sink exclusions (merged with default GKE exclusion — do not reuse the reserved name: exclude-gke-k8s)
+# Additional log sink exclusions (merged with the default GKE and sys-project exclusions — do not reuse the reserved names: exclude-gke-k8s, exclude-sys-projects)
 # log_sink_exclusions = [
 #   {
 #     name   = "my-custom-exclusion"

@@ -69,7 +69,7 @@ module "gcp_audit_logs" {
   infrastructure_project_id  = "my-gcp-project"
   upwind_management_sa_email = "<provided by Upwind>"
   integration_type           = "PROJECT"
-  monitored_project_ids         = ["project-a", "project-b"]
+  monitored_project_ids      = ["project-a", "project-b"]
 }
 ```
 
