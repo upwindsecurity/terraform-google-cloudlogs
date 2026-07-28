@@ -152,6 +152,42 @@ jobs:
           echo "Terraform docs are up to date"
         fi
 
+  terraform-docs-examples:
+    name: Terraform Docs (${{ matrix.example }})
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    needs: discover-modules-examples
+    strategy:
+      matrix:
+        example: ${{ fromJson(needs.discover-modules-examples.outputs.examples) }}
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+
+    - name: Run Terraform Docs
+      uses: terraform-docs/gh-actions@v1.4.1
+      with:
+        working-dir: examples/${{ matrix.example }}
+        config-file: ../../.config/.terraform-docs.yml
+        output-file: README.md
+        fail-on-diff: "false"
+        template: ""
+
+    - name: Check For Changes
+      run: |
+        if [[ -n $(git diff --name-only examples/${{ matrix.example }}/README.md) ]]; then
+          echo "::error::Terraform docs are out of sync!"
+          echo "::group::Diff output"
+          git diff examples/${{ matrix.example }}/README.md
+          echo "::endgroup::"
+          echo ""
+          echo "To fix this, run: make docs"
+          exit 1
+        else
+          echo "Terraform docs are up to date"
+        fi
+
   examples:
     name: Test Examples (${{ matrix.example }})
     runs-on: ubuntu-latest
