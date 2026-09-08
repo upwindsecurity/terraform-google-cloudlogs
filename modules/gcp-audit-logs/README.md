@@ -189,17 +189,17 @@ The sink filter is built dynamically. When multiple types are enabled they are j
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 6.23.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.0.0 |
-| <a name="requirement_time"></a> [time](#requirement\_time) | >= 0.9.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 6.23.0, < 8.0.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.0.0, < 4.0.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | >= 0.9.0, < 1.0.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | >= 6.23.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | >= 3.0.0 |
-| <a name="provider_time"></a> [time](#provider\_time) | >= 0.9.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | >= 6.23.0, < 8.0.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | >= 3.0.0, < 4.0.0 |
+| <a name="provider_time"></a> [time](#provider\_time) | >= 0.9.0, < 1.0.0 |
 
 ## Modules
 
