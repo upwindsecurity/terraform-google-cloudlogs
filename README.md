@@ -18,6 +18,10 @@ observability and threat detection.
 - [modules/gcp-audit-logs/](https://github.com/upwindsecurity/terraform-google-cloudlogs/tree/main/modules/gcp-audit-logs/) -
   Streams GCP Cloud Audit Logs to Upwind via a Log Router sink, Pub/Sub, and Workload
   Identity Federation. Supports organization, folder, and project scope.
+- [modules/gcp-databricks-audit-logs/](https://github.com/upwindsecurity/terraform-google-cloudlogs/tree/main/modules/gcp-databricks-audit-logs/) -
+  Delivers a Databricks account's audit logs on GCP into a Cloud Storage bucket with
+  Pub/Sub notifications, read by Upwind through the GCP onboarding's management service
+  account. Supports a new delivery or an existing one.
 
 ## Examples
 
@@ -26,6 +30,10 @@ Complete usage examples are available in the
 
 - [gcp-audit-logs](https://github.com/upwindsecurity/terraform-google-cloudlogs/tree/main/examples/gcp-audit-logs/) -
   Organization-wide audit log streaming
+- [gcp-databricks-audit-logs](https://github.com/upwindsecurity/terraform-google-cloudlogs/tree/main/examples/gcp-databricks-audit-logs/) -
+  Databricks audit logs delivered to a new bucket
+- [gcp-databricks-audit-logs-existing](https://github.com/upwindsecurity/terraform-google-cloudlogs/tree/main/examples/gcp-databricks-audit-logs-existing/) -
+  Databricks audit logs read from an existing delivery
 
 ## Usage
 
