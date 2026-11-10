@@ -1,0 +1,27 @@
+# Must be in the scope of your Upwind GCP onboarding, applied with enable_dataevents = true.
+project_id = "<your GCP project ID>"
+
+# Bucket
+# bucket_location      = "US"                      # multi-region: US, EU or ASIA
+# delivery_path_prefix = "audit-logs"
+# log_retention_days   = 7                         # 0 keeps delivered files forever
+# bucket_force_destroy = false
+
+# Pub/Sub
+# subscription_message_retention_seconds = 345600  # 4 days
+# subscription_ack_deadline_seconds      = 300
+
+# Names (empty = <prefix>-<suffix>)
+# resource_name_prefix      = "upwind-databricks-audit-logs"
+# bucket_name               = ""
+# topic_name                = ""
+# subscription_name         = ""
+# resource_suffix           = ""                   # empty generates a random one
+
+# Labels
+# environment           = "production"
+# include_common_labels = true
+# additional_labels     = {}
+
+# APIs (left enabled on destroy)
+# enable_apis = true
