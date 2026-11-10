@@ -99,7 +99,12 @@ resource "google_project_service" "required" {
 
 # Multi-region Standard with uniform access, as Databricks documents.
 # Versioning stays off: Databricks rewrites files in place, so versioning would
-# keep every intermediate copy.
+# keep every intermediate copy. The bucket is the customer's: a customer-managed
+# encryption key and access logging (which needs a second bucket) are theirs to
+# add, this module creates neither.
+#trivy:ignore:AVD-GCP-0078
+#trivy:ignore:AVD-GCP-0066
+#trivy:ignore:AVD-GCP-0077
 resource "google_storage_bucket" "audit_logs" {
   count = local.use_existing_bucket ? 0 : 1
 
@@ -134,8 +139,9 @@ resource "google_storage_bucket" "audit_logs" {
   depends_on = [google_project_service.required]
 }
 
-# Storage Admin on the bucket is the grant Databricks documents; it needs to
-# write and list the delivered files.
+# Storage Admin on this one bucket is the grant Databricks documents for its
+# log-delivery service account; it needs to write and list the delivered files.
+#trivy:ignore:AVD-GCP-0007
 resource "google_storage_bucket_iam_member" "databricks_delivery" {
   count = local.use_existing_bucket ? 0 : 1
 
