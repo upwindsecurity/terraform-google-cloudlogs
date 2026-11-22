@@ -3,11 +3,11 @@ terraform {
 
   required_providers {
     # Upper bounds are deliberate: a new provider major must be tested against this
-    # module before customers get it. google 8.0.0 broke onboarding by making
-    # secret_data_wo_version mandatory alongside secret_data_wo (see secrets.tf).
+    # module before customers get it. google 8.x requires secret_data_wo_version
+    # alongside secret_data_wo (set in secrets.tf); validated against 8.9.0.
     google = {
       source  = "hashicorp/google"
-      version = ">= 6.23.0, < 8.0.0"
+      version = ">= 6.23.0, < 9.0.0"
     }
     random = {
       source  = "hashicorp/random"
