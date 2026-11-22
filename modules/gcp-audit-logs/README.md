@@ -189,7 +189,7 @@ The sink filter is built dynamically. When multiple types are enabled they are j
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.11.0 |
-| <a name="requirement_google"></a> [google](#requirement\_google) | >= 6.23.0, < 8.0.0 |
+| <a name="requirement_google"></a> [google](#requirement\_google) | >= 6.23.0, < 9.0.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | >= 3.0.0, < 4.0.0 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | >= 0.9.0, < 1.0.0 |
 
@@ -197,7 +197,7 @@ The sink filter is built dynamically. When multiple types are enabled they are j
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | >= 6.23.0, < 8.0.0 |
+| <a name="provider_google"></a> [google](#provider\_google) | >= 6.23.0, < 9.0.0 |
 | <a name="provider_random"></a> [random](#provider\_random) | >= 3.0.0, < 4.0.0 |
 | <a name="provider_time"></a> [time](#provider\_time) | >= 0.9.0, < 1.0.0 |
 
@@ -260,6 +260,7 @@ No modules.
 | <a name="input_secret_replication_locations"></a> [secret\_replication\_locations](#input\_secret\_replication\_locations) | Regions for user-managed Secret Manager replication of the WIF credentials secret. Leave empty for automatic (global) replication. Set this only when an org policy (e.g. constraints/gcp.resourceLocations) blocks global secrets — replication is immutable, so this must be set before the secret is first created and cannot be changed on an already-deployed secret without destroying and recreating it. | `list(string)` | `[]` | no |
 | <a name="input_upwind_management_sa_email"></a> [upwind\_management\_sa\_email](#input\_upwind\_management\_sa\_email) | Upwind management service account email provided during setup. Granted secretAccessor on the WIF secret. | `string` | n/a | yes |
 | <a name="input_upwind_trusted_account_id"></a> [upwind\_trusted\_account\_id](#input\_upwind\_trusted\_account\_id) | Upwind's AWS account ID that the WIF pool will trust. Defaults to Upwind's production account. | `string` | `"340457201789"` | no |
+| <a name="input_upwind_trusted_role_name"></a> [upwind\_trusted\_role\_name](#input\_upwind\_trusted\_role\_name) | IAM role the Upwind audit-logs consumer assumes in upwind\_trusted\_account\_id; only its assumed-role identities may exchange tokens at the WIF pool. Usually "upwind"; may differ in private regions. A wrong value blocks Upwind and stops log ingestion. Empty (the default) trusts every principal in the account. | `string` | `""` | no |
 | <a name="input_upwind_wif_secret"></a> [upwind\_wif\_secret](#input\_upwind\_wif\_secret) | Name of the Secret Manager secret where the WIF credentials will be stored. | `string` | `"upwind-audit-logs-wif-secret"` | no |
 
 ## Outputs

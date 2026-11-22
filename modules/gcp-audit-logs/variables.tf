@@ -152,6 +152,17 @@ variable "upwind_trusted_account_id" {
   default     = "340457201789"
 }
 
+variable "upwind_trusted_role_name" {
+  description = "IAM role the Upwind audit-logs consumer assumes in upwind_trusted_account_id; only its assumed-role identities may exchange tokens at the WIF pool. Usually \"upwind\"; may differ in private regions. A wrong value blocks Upwind and stops log ingestion. Empty (the default) trusts every principal in the account."
+  type        = string
+  default     = ""
+
+  validation {
+    condition     = var.upwind_trusted_role_name == "" || can(regex("^[A-Za-z0-9+=,.@_-]{1,64}$", var.upwind_trusted_role_name))
+    error_message = "upwind_trusted_role_name must be empty or an IAM role name without its path (1-64 characters: letters, digits, + = , . @ _ -)."
+  }
+}
+
 variable "resource_suffix" {
   description = "Suffix appended to all resource names to avoid conflicts when running the module more than once in the same project. Applied to sink, Pub/Sub, Secret Manager, SA, WIF pool, and IAM roles. Max 6 lowercase alphanumeric characters."
   type        = string

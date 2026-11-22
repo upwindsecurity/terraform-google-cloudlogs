@@ -29,8 +29,11 @@ resource "google_secret_manager_secret" "upwind_wif_secret" {
 # WIF credentials JSON for the runner SA. Write-only — never stored in Terraform state.
 # replace_triggered_by ensures this version is recreated whenever the WIF pool, provider,
 # or SA are recreated — keeping the stored credentials in sync automatically.
+# secret_data_wo_version is mandatory on google >= 8.0.0; it stays fixed at 1 because
+# rotation is driven by replace_triggered_by, not by bumping the version number.
 resource "google_secret_manager_secret_version" "wif_credentials" {
-  secret = google_secret_manager_secret.upwind_wif_secret.id
+  secret                 = google_secret_manager_secret.upwind_wif_secret.id
+  secret_data_wo_version = 1
 
   secret_data_wo = jsonencode({
     universe_domain                   = "googleapis.com"

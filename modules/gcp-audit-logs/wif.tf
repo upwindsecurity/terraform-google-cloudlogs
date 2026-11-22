@@ -1,9 +1,12 @@
 #region Locals
 locals {
-  # Trust scope: any principal from the Upwind AWS account can use this WIF pool
-  # to impersonate the runner SA. This is intentionally account-level (not role-level)
-  # to accommodate multiple Upwind services.
   wif_member = "principalSet://iam.googleapis.com/${google_iam_workload_identity_pool.upwind_wif_pool.name}/attribute.aws_account/${var.upwind_trusted_account_id}"
+
+  # Trust scope. When upwind_trusted_role_name is set, the provider only accepts STS identities
+  # of that role (arn:aws:sts::<account>:assumed-role/<role>/<session>), with any session name.
+  wif_account_condition   = "assertion.account == '${var.upwind_trusted_account_id}'"
+  wif_role_condition      = "assertion.arn.startsWith('arn:aws:sts::${var.upwind_trusted_account_id}:assumed-role/${var.upwind_trusted_role_name}/')"
+  wif_attribute_condition = var.upwind_trusted_role_name == "" ? local.wif_account_condition : "${local.wif_account_condition} && ${local.wif_role_condition}"
 }
 #endregion
 
@@ -45,7 +48,7 @@ resource "google_iam_workload_identity_pool_provider" "upwind_aws_provider" {
     "attribute.aws_account" = "assertion.account"
   }
 
-  attribute_condition = "assertion.account == '${var.upwind_trusted_account_id}'"
+  attribute_condition = local.wif_attribute_condition
 
   aws {
     account_id = var.upwind_trusted_account_id
